@@ -25,8 +25,8 @@ class TaskController extends Controller
             'title' => "required",
             'description' => "required",
             'category_id' => "required|numeric",
-            'flag' => "required|is:low,hight,medium",
-            'deadline' => "required|datetime"
+            'flag' => "required|in:low,hight,medium",
+            'deadline' => "required|date"
         ]);
 
         $task = Task::create([
