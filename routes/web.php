@@ -16,3 +16,4 @@ Route::get('/register' , function(){
 })->name("register");
 
 Route::post('/register' , [ProviderController::class , "register"])->name("register.post");
+Route::post('/login' , [ProviderController::class , "login"])->name("login.post");

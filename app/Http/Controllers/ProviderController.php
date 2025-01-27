@@ -31,15 +31,35 @@ class ProviderController extends Controller
             email: $provider->email
         ));
 
+        session()->flash("message", "توکن با موفقیت به ایمیل شما ارسال شد");
         return redirect()->route("welcome");
     }
 
-    public function sendToken(Request $request)
+    public function login(Request $request)
     {
-        // ... کد قبلی ...
-        
-        Mail::queue(new SendToken($token, $user->name));
-        
-        return response()->json(['message' => 'توکن با موفقیت ارسال شد']);
+        $request->validate([
+            "email" => "required|email",
+            "password" => "required"
+        ]);
+
+        $provider = Provider::where("email", $request->email)->first();
+
+        if (!$provider || !Hash::check($request->password, $provider->password)) {
+            return back()->withErrors([
+                'email' => 'ایمیل یا رمز عبور اشتباه است',
+            ]);
+        }
+
+        $provider->update([
+            "token" => Str::random(30)
+        ]);
+
+        Mail::send(new SendToken(
+            token: $provider->token,
+            name: $provider->name,
+            email: $provider->email
+        ));
+
+        return redirect()->route('welcome')->with('message', 'با موفقیت وارد شدید ، توکن به ایمیل شما ارسال شد');
     }
 }

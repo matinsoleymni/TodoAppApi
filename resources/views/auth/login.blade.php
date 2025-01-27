@@ -8,22 +8,26 @@
         <div class="card-body">
             <h2 class="card-title text-2xl font-bold text-center block">ورود به حساب کاربری</h2>
             
-            <form>
+            <form method="POST" action="{{ route('login.post') }}">
+                @csrf
                 <div class="form-control">
                     <label class="label">
                         <span class="label-text">ایمیل</span>
                     </label>
-                    <input type="email" placeholder="example@mail.com" class="input input-bordered" required />
+                    <input type="email" name="email" placeholder="example@mail.com" class="input input-bordered" required />
+                    @error('email')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
                 
                 <div class="form-control">
                     <label class="label">
                         <span class="label-text">رمز عبور</span>
                     </label>
-                    <input type="password" placeholder="رمز عبور خود را وارد کنید" class="input input-bordered" required />
-                    <label class="label">
-                        <a href="#" class="label-text-alt link link-hover">رمز عبور را فراموش کرده‌اید؟</a>
-                    </label>
+                    <input name="password" type="password" placeholder="رمز عبور خود را وارد کنید" class="input input-bordered" required />
+                    @error('password')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
                 
                 <div class="form-control mt-6">
