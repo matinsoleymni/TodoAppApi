@@ -1,6 +1,5 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 
-/** @type {import('tailwindcss').Config} */
 export default {
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
@@ -12,9 +11,13 @@ export default {
     theme: {
         extend: {
             fontFamily: {
+                'vazirmatn': ['Vazirmatn', 'sans-serif'],
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
     },
-    plugins: [],
+    daisyui: {
+        themes: ["dark"],
+    },
+    plugins: [require('daisyui')],
 };
