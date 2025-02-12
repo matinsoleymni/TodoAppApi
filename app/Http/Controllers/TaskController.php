@@ -6,7 +6,6 @@ use App\Models\Task;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\Rule;
 
 class TaskController extends Controller
 {
@@ -26,8 +25,8 @@ class TaskController extends Controller
             'title' => "required",
             'description' => "required",
             'category_id' => "required|numeric",
-            'flag' => "required|in:low,hight,medium",
-            'deadline' => ["required" , Rule::date()->format('Y-m-d')]
+            'flag' => "required|in:low,high,medium",
+            'deadline' => "required"
         ]);
 
         $task = Task::create([

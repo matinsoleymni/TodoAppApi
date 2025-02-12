@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("category_id");
             $table->enum("flag" , ['low' , 'medium' , 'high'])->default("low");
-            $table->dateTime("deadline");
+            $table->text("deadline");
             $table->boolean("is_do")->default(false);
             $table->foreign("category_id")->references("id")->on("categories");
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");

@@ -21,10 +21,12 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'icon' => 'nullable',
         ]);
 
         $category = Category::create([
             "name" => $request->name,
+            "icon" => $request->icon,
             "user_id" => $request->user()->id
         ]);
 
@@ -35,12 +37,14 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'icon' => 'nullable',
         ]);
 
         try {
             $category = Category::findOrFail($id);
             $category->update([
-                "name" => $request->name
+                "name" => $request->name,
+                "icon" => $request->icon
             ]);
 
             return response()->json(['category' => $category , "message" => "updated"]);
